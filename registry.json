@@ -1,0 +1,115 @@
+{
+  "$comment": "Parts that scripts/add.mjs copies into a site. 'to' is relative to the site folder. 'own' files are copied once and never overwritten: the site owns them from the start.",
+  "parts": {
+    "core": {
+      "description": "Router, nav, global search, theme toggle, markdown and source-link helpers.",
+      "files": [
+        {
+          "from": "parts/core.js",
+          "to": "app/core.js"
+        },
+        {
+          "from": "parts/base.css",
+          "to": "app/base.css"
+        }
+      ],
+      "requires": []
+    },
+    "theme": {
+      "description": "Default colour and font tokens. Replace per project.",
+      "files": [
+        {
+          "from": "parts/theme.css",
+          "to": "theme.css",
+          "own": true
+        }
+      ],
+      "requires": []
+    },
+    "diagram": {
+      "description": "SVG diagram renderer: grid layout, edge routing, pan and zoom, keyboard, highlights and step badges.",
+      "files": [
+        {
+          "from": "parts/diagram.js",
+          "to": "app/diagram.js"
+        }
+      ],
+      "requires": [
+        "core"
+      ]
+    },
+    "arch": {
+      "description": "Architecture view: diagram tabs, the map with a collapsible sidebar, fullscreen, the flow picker with / paths, flows as cards or a list, and a component index.",
+      "files": [
+        {
+          "from": "parts/arch-view.js",
+          "to": "app/arch-view.js"
+        }
+      ],
+      "data": "architecture.js",
+      "requires": [
+        "core",
+        "diagram"
+      ]
+    },
+    "tldr": {
+      "description": "TL;DR view: a block map you open and zoom into the real architecture diagrams.",
+      "files": [
+        {
+          "from": "parts/tldr-view.js",
+          "to": "app/tldr-view.js"
+        }
+      ],
+      "data": "tldr.js",
+      "requires": [
+        "core",
+        "diagram",
+        "arch"
+      ]
+    },
+    "features": {
+      "description": "Features view: group rail with counts, search with group/ scopes and @component filters, cards or list, and an inspector with a small diagram, config, invariants, failure modes, flows and related features.",
+      "files": [
+        {
+          "from": "parts/features-view.js",
+          "to": "app/features-view.js"
+        }
+      ],
+      "data": "features.js",
+      "requires": [
+        "core",
+        "diagram"
+      ]
+    },
+    "knob": {
+      "description": "Rotary view switcher for exactly three views. Set ATLAS_SITE.nav to \"knob\".",
+      "files": [
+        {
+          "from": "parts/knob.js",
+          "to": "app/knob.js"
+        },
+        {
+          "from": "parts/knob.css",
+          "to": "app/knob.css"
+        }
+      ],
+      "requires": [
+        "core"
+      ]
+    }
+  },
+  "order": {
+    "styles": [
+      "app/base.css",
+      "app/knob.css"
+    ],
+    "scripts": [
+      "app/core.js",
+      "app/knob.js",
+      "app/diagram.js",
+      "app/arch-view.js",
+      "app/tldr-view.js",
+      "app/features-view.js"
+    ]
+  }
+}

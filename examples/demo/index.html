@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order service</title>
+<meta name="description" content="">
+<script>
+  // Set the theme before first paint: saved choice, else the system setting.
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("order-service-theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    }
+    document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+<!-- atlas:styles -->
+<link rel="stylesheet" href="app/base.css">
+<!-- /atlas:styles -->
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <h1><a id="site-title" href="#">Order service</a></h1>
+      <p class="tagline" id="site-tagline"></p>
+    </div>
+    <div id="nav"></div>
+    <div class="tools">
+      <div class="search" id="search">
+        <svg class="search-glyph" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 10l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input id="search-input" type="search" placeholder="Search docs" autocomplete="off" spellcheck="false"
+          role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list"
+          aria-label="Search the docs">
+        <kbd class="search-key" aria-hidden="true">Ctrl K</kbd>
+        <ul class="results" id="search-results" role="listbox" aria-label="Search results" hidden></ul>
+      </div>
+      <button class="btn theme-toggle" id="theme-toggle" type="button"></button>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <!-- core.js adds one section per view here -->
+  <p class="sr-only" id="view-status" aria-live="polite"></p>
+</main>
+
+<footer class="foot">
+  <span>Keys: <span id="view-keys"></span> switch views, <kbd>/</kbd> searches the view, <kbd id="global-key">Ctrl K</kbd> searches everything.</span>
+  <span id="site-source"></span>
+</footer>
+
+<!-- atlas:scripts -->
+<script src="data/site.js"></script>
+<script src="data/architecture.js"></script>
+<script src="data/tldr.js"></script>
+<script src="data/features.js"></script>
+<script src="app/core.js"></script>
+<script src="app/diagram.js"></script>
+<script src="app/arch-view.js"></script>
+<script src="app/tldr-view.js"></script>
+<script src="app/features-view.js"></script>
+<!-- /atlas:scripts -->
+</body>
+</html>

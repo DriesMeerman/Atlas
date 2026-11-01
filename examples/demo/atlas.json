@@ -1,0 +1,20 @@
+{
+  "engine": "https://github.com/DriesMeerman/atlas",
+  "commit": "unknown",
+  "parts": [
+    "diagram",
+    "arch",
+    "tldr",
+    "features"
+  ],
+  "files": {
+    "app/core.js": "f076a420a4f4dfad",
+    "app/base.css": "57c3e802cbf12061",
+    "app/diagram.js": "c5729189a9a9955c",
+    "app/arch-view.js": "54d82bab0a10348a",
+    "app/tldr-view.js": "eaab43b5db4be658",
+    "theme.css": "e4f135bed7fcadcb",
+    "app/features-view.js": "44594ea176e071e6"
+  },
+  "updated": "2026-11-01"
+}

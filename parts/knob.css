@@ -1,0 +1,100 @@
+/* Atlas knob: a rotary view switcher for three views. Optional; core.js uses it when ATLAS_SITE.nav is "knob". */
+:root { --dial-face: radial-gradient(circle at 35% 30%, #2a3244 0%, #141925 55%, #090b11 100%); }
+:root[data-theme="light"] { --dial-face: radial-gradient(circle at 35% 30%, #ffffff 0%, #e3e8f0 60%, #c7cfdb 100%); }
+#nav .knob { margin: 0 auto; }
+.knob {
+  --size: 76px;
+  --angle: -60deg;
+  display: grid;
+  grid-template-columns: 1fr var(--size) 1fr;
+  grid-template-rows: auto var(--size);
+  grid-template-areas: "top top top" "left dial right";
+  column-gap: 10px;
+  row-gap: 2px;
+  align-items: start;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.knob-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 2px 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.knob-label:hover { color: var(--text); }
+.knob-label.is-active { color: var(--accent); text-shadow: 0 0 10px color-mix(in srgb, var(--accent) 60%, transparent); }
+.knob-label[data-i="0"] { grid-area: left; justify-self: end; margin-top: 10px; }
+.knob-label[data-i="1"] { grid-area: top; justify-self: center; }
+.knob-label[data-i="2"] { grid-area: right; justify-self: start; margin-top: 10px; }
+
+.dial {
+  grid-area: dial;
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+}
+.dial:active { cursor: grabbing; }
+.dial-ring {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background:
+    conic-gradient(from -90deg, transparent 0 30deg, color-mix(in srgb, var(--accent) 20%, transparent) 30deg 150deg, transparent 150deg);
+}
+.dial-tick {
+  position: absolute; left: 50%; top: 0;
+  width: 2px; height: 7px; margin-left: -1px;
+  background: var(--muted);
+  transform-origin: 1px calc(var(--size) / 2);
+}
+.dial-tick.is-active { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+.dial-face {
+  position: absolute; inset: 10px;
+  border-radius: 50%;
+  background: var(--dial-face);
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transform: rotate(var(--angle));
+  transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dial.is-dragging .dial-face { transition: none; }
+.dial-face::before {
+  /* knurled grip */
+  content: ""; position: absolute; inset: 3px; border-radius: 50%;
+  background: repeating-conic-gradient(rgba(255, 255, 255, 0.05) 0 4deg, transparent 4deg 10deg);
+}
+.dial-pointer {
+  position: absolute; left: 50%; top: 4px;
+  width: 3px; height: 40%;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.dial-cap {
+  position: absolute; inset: 36%;
+  border-radius: 50%;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+}
+.dial:focus-visible .dial-ring { box-shadow: 0 0 0 2px var(--accent); }
+.dial.is-click .dial-ring { animation: knob-click 380ms ease-out; }
+@keyframes knob-click {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 70%, transparent); }
+  100% { box-shadow: 0 0 0 10px transparent; }
+}
+
+/* ---------- Views and transition ---------- */
+
+@media (prefers-reduced-motion: reduce) { .dial.is-click .dial-ring { animation: none !important; } .dial-face { transition: none; } }
