@@ -1,5 +1,12 @@
 # atlas
 
+> [!NOTE]
+> atlas is made for LLM agents to do the work. An agent reads your code, writes the data
+> files, and changes the parts to fit the project. You review the result. To have an agent
+> build a site, run the
+> [`architecture-docs`](https://github.com/DriesMeerman/3stack-skills/blob/main/skills/architecture-docs/SKILL.md)
+> skill.
+
 Parts for interactive architecture docs sites: a TL;DR block map that zooms into the real
 diagrams, architecture diagrams with a component sidebar and flows that light up their
 path, and a features catalog you can scope with `group/subgroup` paths and filter by
